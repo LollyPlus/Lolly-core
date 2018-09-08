@@ -1,0 +1,22 @@
+{
+    "name": "mrxzx/lolly-plus-core",
+    "description": "LollyPlus核心代码",
+    "type": "library",
+    "require": {
+        "catfan/medoo": "dev-master",
+        "filp/whoops": "^2.2@dev"
+    },
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "xiaozhuox",
+            "email": "mrxzx@wwsg18.top"
+        }
+    ],
+    "autoload":{
+        "psr-4":{
+            "LollyPlus\\":"src"
+        }
+    },
+    "minimum-stability": "dev"
+}
