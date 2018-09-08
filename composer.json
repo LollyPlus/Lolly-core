@@ -1,5 +1,5 @@
 {
-    "name": "mrxzx/lolly-plus-core",
+    "name": "lolly/lolly-plus-core",
     "description": "LollyPlus核心代码",
     "type": "library",
     "require": {
