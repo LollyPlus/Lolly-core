@@ -9,6 +9,8 @@ class Lolly{
     private $route = [];
     private $num = [];
 
+    private $static = [];
+
     //运行LollyPlus项目
     public function Run(){
         $config = Config::ReadConf("site");
@@ -22,6 +24,26 @@ class Lolly{
                 error_reporting(E_ALL);
                 ini_set('display_errors','Off');
                 ini_set('log_errors', 'On');
+            }
+
+            //加载Route配置文件路由
+            $routes = Config::ReadConf("router");
+            foreach($routes as $key => $val){
+                if(is_string($val)){
+                    $this->route[$key] = $val;
+                    $this->num[$key] = 0;
+                }elseif(is_array($val)){
+                    if(isset($val['func'],$val['num'])){
+                        $this->route[$key] = $val['func'];
+                        $this->num[$key] = $val['num'];
+                    }
+                }
+            }
+
+            //加载Static静态路径
+            $statics = $config['Static_Path'];
+            foreach($statics as $key => $val){
+                $this->static[$key] = $val;
             }
 
             //解析URL
@@ -40,44 +62,67 @@ class Lolly{
 
             //获取更多数据
             $param = $urlList;
-            array_shift($param);
-            if(substr($_SERVER["REQUEST_URI"],-1) == '/' && isset($urlList[0])){
-                array_push($param,'');
-            }
+            $urls = $urlList;
 
             //处理访问的URL
-            if(! sizeof($urlList) < sizeof($pathList)) {
+            if(sizeof($urls) >= sizeof($pathList)) {
                 for ($i = 0; $i < sizeof($pathList); $i++) {
-                    if ($pathList[$i] != $urlList[$i]) {
+                    if ($pathList[$i] != $urls[$i]) {
                         $this->_404();
                     }
                     array_shift($urlList);
+                    array_shift($param);
                 }
             }else{
                 $this->_404();
             }
 
+            //处理特殊情况
+            array_shift($param);
+            if(substr($_SERVER["REQUEST_URI"],-1) == '/' && isset($urlList[0])){
+                array_push($param,'');
+            }
+
             //根据URL获取函数返回值
-            $route = $urlList[0];
+            if(sizeof($urlList) > 0){
+                $route = $urlList[0];
+            }else{
+                $route = $config['Site_Index'];
+            }
 
             if(array_key_exists($route,$this->route)){
                 $func = $this->route[$route];
                 if(is_string($func)){
-                    @call_user_func($func,$param);
+                    @exit(call_user_func($func,$param));
                 }elseif(is_object($func)){
-                    @$func($param);
+                    @exit($func($param));
                 }else{
                     $this->_404();
                 }
+            }elseif(array_key_exists($route,$this->static)){
+                $dir = Lolly . 'app/view/public' . $this->static[$route];
+                if(is_file($dir .  implode('/',$param))){
+                    exit(@file_get_contents($dir .  implode('/',$param)));
+                }
+            }else{
+                $this->_404();
             }
+
         }
     }
 
+    //加载单个路由
     public function Route($path,$func,$num=0){
         $this->route[$path] = $func;
         $this->num[$path] = $num;
     }
 
+    //增加静态路径
+    public function StaticPath($name,$path){
+        $this->static[$name] = $path;
+    }
+
+    //404页面显示
     private function _404(){
         exit("404 Not Find");
     }
