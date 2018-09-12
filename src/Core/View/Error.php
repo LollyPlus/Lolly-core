@@ -7,6 +7,8 @@ class Error{
         $path = Lolly . '/app/view/error/' . (string)$code . '.' . $suffix;
         if(is_file($path)){
             echo @file_get_contents($path);
+            return true;
         }
+        return false;
     }
 }

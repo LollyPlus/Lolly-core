@@ -1,6 +1,7 @@
 {
     "name": "lolly/lolly-core",
     "description": "Lolly核心代码",
+    "version": "2.0.0",
     "type": "library",
     "require": {
         "catfan/medoo": "dev-master",
