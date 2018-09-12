@@ -1,6 +1,6 @@
 {
-    "name": "lolly/lolly-plus-core",
-    "description": "LollyPlus核心代码",
+    "name": "lolly/lolly-core",
+    "description": "Lolly核心代码",
     "type": "library",
     "require": {
         "catfan/medoo": "dev-master",
@@ -15,7 +15,7 @@
     ],
     "autoload":{
         "psr-4":{
-            "LollyPlus\\":"src"
+            "Lolly\\":"src"
         }
     },
     "minimum-stability": "dev"
