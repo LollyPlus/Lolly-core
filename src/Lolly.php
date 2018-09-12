@@ -28,7 +28,7 @@ class Lolly{
             }
 
             //加载Route配置文件路由
-            $routes = Config::ReadConf("router");
+            $routes = Config::ReadConf("route");
             foreach($routes as $key => $val){
                 if(is_string($val)){
                     $this->route[$key] = $val;

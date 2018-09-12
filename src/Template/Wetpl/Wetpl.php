@@ -28,7 +28,7 @@ class Wetpl{
         $fname = explode('.',$this->file);
         array_pop($fname);
         $fname = implode('.',$fname);
-        require_once(Lolly."/runtime/complie/" . $fname . '.php');
+        require_once(Lolly."/runtime/compile/" . $fname . '.php');
 
         $code = ob_get_contents();
         ob_clean();
