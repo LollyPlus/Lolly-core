@@ -1,8 +1,8 @@
 <?php
 
-namespace LollyPlus;
+namespace Lolly;
 
-use Lolly\Config\Config;
+use Lolly\Tools\Config;
 
 class Lolly{
 
@@ -12,7 +12,7 @@ class Lolly{
         if(! is_null($config)){
 
             //开启或关闭Debug
-            if ($config["Site_DEBUG"]) {
+            if ($config["Site_Debug"]) {
                 error_reporting(E_ALL);
                 ini_set('display_errors','On');
             } else {
@@ -26,9 +26,21 @@ class Lolly{
             $pos = strpos($url,'?');
             $url = $pos === false ? $url : substr($url, 0, $pos);
             $url = trim($url,'/');
-
             $urlList = explode('/',$url);
-            var_dump($urlList);
+
+            //解析访问地址
+            $path = $config['Local_Path'];
+            $pos = strpos($url,'?');
+            $url = $pos === false ? $url : substr($url, 0, $pos);
+            $url = trim($url,'/');
+            $pathList = explode('/',$url);
+
+            for($i = 0;$i < sizeof($pathList);$i++){
+                if($pathList[$i] != $urlList[$i]){
+                    exit("404 Not Find");
+                }
+            }
+            echo "hahah";
         }
     }
 }
