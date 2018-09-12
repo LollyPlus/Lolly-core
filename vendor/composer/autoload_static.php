@@ -6,6 +6,10 @@ namespace Composer\Autoload;
 
 class ComposerStaticInitc36763460d9eebfae312874fc4048454
 {
+    public static $files = array (
+        '9a54d68c121178be89499d048e1a4553' => __DIR__ . '/../..' . '/src/Core/Functions.php',
+    );
+
     public static $prefixLengthsPsr4 = array (
         'W' => 
         array (
@@ -21,7 +25,7 @@ class ComposerStaticInitc36763460d9eebfae312874fc4048454
         ),
         'L' => 
         array (
-            'LollyPlus\\' => 10,
+            'Lolly\\' => 6,
         ),
     );
 
@@ -38,7 +42,7 @@ class ComposerStaticInitc36763460d9eebfae312874fc4048454
         array (
             0 => __DIR__ . '/..' . '/catfan/medoo/src',
         ),
-        'LollyPlus\\' => 
+        'Lolly\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),

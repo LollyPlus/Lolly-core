@@ -2,6 +2,7 @@
 
 namespace Lolly;
 
+use Lolly\Core\View\Error;
 use Lolly\Tools\Config;
 
 class Lolly{
@@ -11,7 +12,7 @@ class Lolly{
 
     private $static = [];
 
-    //运行LollyPlus项目
+    //运行Lolly项目
     public function Run(){
         $config = Config::ReadConf("site");
         if(! is_null($config)){
@@ -100,7 +101,7 @@ class Lolly{
                     $this->_404();
                 }
             }elseif(array_key_exists($route,$this->static)){
-                $dir = Lolly . 'app/view/public' . $this->static[$route];
+                $dir = Lolly . '/app/view/public' . $this->static[$route];
                 if(is_file($dir .  implode('/',$param))){
                     exit(@file_get_contents($dir .  implode('/',$param)));
                 }
@@ -124,6 +125,6 @@ class Lolly{
 
     //404页面显示
     private function _404(){
-        exit("404 Not Find");
+        Error::Render_Error(404);
     }
 }
