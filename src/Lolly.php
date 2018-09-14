@@ -126,5 +126,6 @@ class Lolly{
     //404页面显示
     private function _404(){
         Error::Render_Error(404);
+        die();
     }
 }
