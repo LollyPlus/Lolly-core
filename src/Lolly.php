@@ -84,6 +84,9 @@ class Lolly{
                 array_push($param,'');
             }
 
+            $sym = str_repeat('../',sizeof($param));
+            define('_PUBLIC_',$sym);
+
             //根据URL获取函数返回值
             if(sizeof($urlList) > 0){
                 $route = $urlList[0];

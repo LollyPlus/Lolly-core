@@ -11,6 +11,9 @@ class Template{
         if(strtolower($config['Tpl_Type']) == "wetpl"){
             $left = $config['Left_Delimit'];
             $right = $config['Right_Delimit'];
+
+            $var['_PUBLIC_'] = _PUBLIC_;
+
             return Wetpl::render($file,$var,$left,$right);
         }
         return '';

@@ -16,8 +16,6 @@ include_once('Compile.php');
 class Wetpl{
     private $parser,$page,$file;
     public function __construct($file,$var,$left='{%',$right='%}'){
-        $name = Config::ReadConf("template");
-
         $this->file = $file;
         $tpl = file_get_contents(Lolly . '/app/view/public/' . $this->file);
         $this->parser = new Parser($tpl,$var,$left,$right);
