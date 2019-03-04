@@ -7,6 +7,8 @@ use Lolly\Tools\Config;
 
 class Lolly{
 
+    public static $version = '2.0.4';
+
     private $route = [];
     private $num = [];
 
